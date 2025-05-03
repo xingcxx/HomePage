@@ -1,0 +1,832 @@
+<!DOCTYPE html><html style='font-size:17px'><head>  <meta charset=UTF-8>  <meta name='viewport' content='width=100%, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no'>  <title>新建文本</title>  
+<link rel="stylesheet" href="/var/mobile/Containers/Data/Application/665B0D88-8AA4-4FC4-8336-182CDD5AF8AE/Library/Application Support/MarkDownResources/Styles/GitHub.css"/>
+<link rel="stylesheet" href="/var/mobile/Containers/Data/Application/665B0D88-8AA4-4FC4-8336-182CDD5AF8AE/Library/Application Support/MarkDownResources/Highlight/highlight-style/tomorrow.css"/>  
+<script src="/var/mobile/Containers/Data/Application/665B0D88-8AA4-4FC4-8336-182CDD5AF8AE/Library/Application Support/MarkDownResources/Highlight/highlightjs/highlight.min.js"></script>
+<script src="/var/mobile/Containers/Data/Application/665B0D88-8AA4-4FC4-8336-182CDD5AF8AE/Library/Application Support/MarkDownResources/Highlight/highlightjs/swift.min.js"></script>
+<script src="/var/mobile/Containers/Data/Application/665B0D88-8AA4-4FC4-8336-182CDD5AF8AE/Library/Application Support/MarkDownResources/MathJax/tex-mml-chtml.js"></script>  <script>hljs.initHighlightingOnLoad();</script>  <script type='text/x-mathjax-config'>MathJax.Hub.Config({'showProcessingMessages': false, 'messageStyle': 'none'});</script></head><body>  <p>&lt;!DOCTYPE html&gt;<br>
+<html lang="en"><br>
+<head><br>
+    <meta charset="UTF-8"><br>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><br>
+    <title>Clash Configuration</title><br>
+    <style><br>
+        body {<br>
+            font-family: Arial, sans-serif;<br>
+            margin: 20px;<br>
+            background-color: #f4f4f4;<br>
+        }<br>
+        h1 {<br>
+            color: #333;<br>
+        }<br>
+        .content {<br>
+            background-color: #fff;<br>
+            padding: 20px;<br>
+            border-radius: 5px;<br>
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);<br>
+            white-space: pre-wrap;<br>
+            font-family: &#39;Courier New&#39;, Courier, monospace;<br>
+        }<br>
+    </style><br>
+</head><br>
+<body><br>
+    <h1>Clash Configuration</h1><br>
+    <div class="content"></p>
+
+<h1 id="toc_0">代理组配置 (用于订阅链接)</h1>
+
+<p>proxy-providers:<br>
+  p1:<br>
+    type: http<br>
+    url: <q><a href="https://cxx.024657.xyz/cxx">https://cxx.024657.xyz/cxx</a></q> # 请替换成你的订阅链接<br>
+    interval: 86400<br>
+    proxy: 🔰 模式选择<br>
+    path: ./proxy<u>providers/p1.yaml # 定义缓存路径<br>
+    health-check:<br>
+      enable: false # 健康检查默认关闭<br>
+      url: <a href="http://www.gstatic.com/generate">http://www.gstatic.com/generate</a></u>204<br>
+      interval: 3600<br>
+    override:<br>
+      additional-prefix: <q>p1 |</q> # 节点名称前缀 p1<br>
+      udp: true<br>
+      # interface-name: &quot;&quot;</p>
+
+<p># --- 在这里添加其他订阅 ---<br>
+  # p2:<br>
+  #   type: http<br>
+  #   url: <q>YOUR<u>SECOND</u>SUBSCRIPTION_URL</q><br>
+  #   interval: 86400<br>
+  #   path: ./proxy<u>providers/p2.yaml<br>
+  #   health-check:<br>
+  #     enable: true<br>
+  #     url: <a href="http://www.gstatic.com/generate">http://www.gstatic.com/generate</a></u>204<br>
+  #     interval: 3600<br>
+  #   override:<br>
+  #     additional-prefix: <q>p2 |</q></p>
+
+<h1 id="toc_1">单个代理配置 (用于落地节点)</h1>
+
+<p>proxies:<br>
+  # --- 落地节点 开始 (请替换成你自己的信息) ---<br>
+  - name: webshare # 给你的落地节点起个名字<br>
+    server: <q>74.122.61.165</q> # 替换成你的落地节点 IP 或域名<br>
+    port: 6997 # 替换成你的落地节点端口<br>
+    type: socks5<br>
+    username: <q>khjwewyn</q> # 替换成你的用户名<br>
+    password: <q>i0p0rds83yjy</q> # 替换成你的密码<br>
+    tls: false<br>
+    skip-cert-verify: true<br>
+    udp: true<br>
+    dialer-proxy: ⚙️ 节点选择<br>
+  # 如果有更多落地节点，在这里继续添加<br>
+  # - name: landing-node-2<br>
+  #   ... # 其他配置<br>
+  #   udp: true # 根据脚本逻辑添加<br>
+  #   dialer-proxy: ⚙️ 节点选择<br>
+  # --- 落地节点 结束 ---<br>
+  # --- 这里通常会由订阅或其他方式填充更多代理节点 ---<br>
+  # - name: <q>示例节点</q><br>
+  #   type: vmess<br>
+  #   server: <q>server.com</q><br>
+  #   port: 443<br>
+  #   uuid: <q>...</q><br>
+  #   alterId: 0<br>
+  #   cipher: auto<br>
+  #   tls: true<br>
+  #   udp: true # 确保添加 udp 支持</p>
+
+<h1 id="toc_2">DNS 配置</h1>
+
+<p>dns:<br>
+  enable: true<br>
+  listen: 0.0.0.0:1053<br>
+  # ipv6: true  # 根据需要取消注释<br>
+  prefer-h3: false<br>
+  respect-rules: true<br>
+  use-system-hosts: false<br>
+  cache-algorithm: arc<br>
+  enhanced-mode: fake-ip<br>
+  fake-ip-range: 198.18.0.1/16<br>
+  fake-ip-filter:<br>
+    - &#39;+.lan&#39;<br>
+    - &#39;+.local&#39;<br>
+    - &#39;+.msftconnecttest.com&#39;<br>
+    - &#39;+.msftncsi.com&#39;<br>
+    - &#39;localhost.ptlogin2.qq.com&#39;<br>
+    - &#39;localhost.sec.qq.com&#39;<br>
+    - &#39;localhost.work.weixin.qq.com&#39;<br>
+  default-nameserver:<br>
+    - 223.5.5.5<br>
+    - 1.2.4.8<br>
+  nameserver:<br>
+    - <a href="https://cloudflare-dns.com/dns-query">https://cloudflare-dns.com/dns-query</a> # CloudflareDNS<br>
+    - <a href="https://77.88.8.8/dns-query">https://77.88.8.8/dns-query</a> # YandexDNS<br>
+    - &#39;<a href="https://8.8.4.4/dns-query#ecs=1.1.1.1/24&amp;ecs-override=true">https://8.8.4.4/dns-query#ecs=1.1.1.1/24&amp;ecs-override=true</a>&#39; # GoogleDNS (带 ECS)<br>
+    - &#39;<a href="https://208.67.222.222/dns-query#ecs=1.1.1.1/24&amp;ecs-override=true">https://208.67.222.222/dns-query#ecs=1.1.1.1/24&amp;ecs-override=true</a>&#39; # OpenDNS (带 ECS)<br>
+  proxy-server-nameserver:<br>
+    - <a href="https://223.5.5.5/dns-query">https://223.5.5.5/dns-query</a> # 阿里DoH<br>
+    - <a href="https://doh.pub/dns-query">https://doh.pub/dns-query</a> # 腾讯DoH<br>
+  direct-nameserver:<br>
+    - <a href="https://223.5.5.5/dns-query">https://223.5.5.5/dns-query</a> # 阿里DoH<br>
+    - <a href="https://doh.pub/dns-query">https://doh.pub/dns-query</a> # 腾讯DoH<br>
+  direct-nameserver-follow-policy: false<br>
+  nameserver-policy:<br>
+    &#39;geosite:cn&#39;:<br>
+      - <a href="https://223.5.5.5/dns-query">https://223.5.5.5/dns-query</a> # 阿里DoH<br>
+      - <a href="https://doh.pub/dns-query">https://doh.pub/dns-query</a> # 腾讯DoH</p>
+
+<h1 id="toc_3">规则提供者配置</h1>
+
+<p>rule-providers:<br>
+  reject:<br>
+    type: http<br>
+    format: yaml<br>
+    interval: 86400<br>
+    behavior: domain<br>
+    url: <a href="https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt">https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt</a><br>
+    path: ./ruleset/loyalsoldier/reject.yaml<br>
+  icloud:<br>
+    type: http<br>
+    format: yaml<br>
+    interval: 86400<br>
+    behavior: domain<br>
+    url: <a href="https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/icloud.txt">https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/icloud.txt</a><br>
+    path: ./ruleset/loyalsoldier/icloud.yaml<br>
+  apple:<br>
+    type: http<br>
+    format: yaml<br>
+    interval: 86400<br>
+    behavior: domain<br>
+    url: <a href="https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/apple.txt">https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/apple.txt</a><br>
+    path: ./ruleset/loyalsoldier/apple.yaml<br>
+  google:<br>
+    type: http<br>
+    format: yaml<br>
+    interval: 86400<br>
+    behavior: domain<br>
+    url: <a href="https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/google.txt">https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/google.txt</a><br>
+    path: ./ruleset/loyalsoldier/google.yaml<br>
+  proxy:<br>
+    type: http<br>
+    format: yaml<br>
+    interval: 86400<br>
+    behavior: domain<br>
+    url: <a href="https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/proxy.txt">https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/proxy.txt</a><br>
+    path: ./ruleset/loyalsoldier/proxy.yaml<br>
+  direct:<br>
+    type: http<br>
+    format: yaml<br>
+    interval: 86400<br>
+    behavior: domain<br>
+    url: <a href="https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/direct.txt">https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/direct.txt</a><br>
+    path: ./ruleset/loyalsoldier/direct.yaml<br>
+  private:<br>
+    type: http<br>
+    format: yaml<br>
+    interval: 86400<br>
+    behavior: domain<br>
+    url: <a href="https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/private.txt">https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/private.txt</a><br>
+    path: ./ruleset/loyalsoldier/private.yaml<br>
+  gfw:<br>
+    type: http<br>
+    format: yaml<br>
+    interval: 86400<br>
+    behavior: domain<br>
+    url: <a href="https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/gfw.txt">https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/gfw.txt</a><br>
+    path: ./ruleset/loyalsoldier/gfw.yaml<br>
+  &#39;tld-not-cn&#39;: # 引号用于确保 key 正确解析<br>
+    type: http<br>
+    format: yaml<br>
+    interval: 86400<br>
+    behavior: domain<br>
+    url: <a href="https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/tld-not-cn.txt">https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/tld-not-cn.txt</a><br>
+    path: ./ruleset/loyalsoldier/tld-not-cn.yaml<br>
+  telegramcidr:<br>
+    type: http<br>
+    format: yaml<br>
+    interval: 86400<br>
+    behavior: ipcidr<br>
+    url: <a href="https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/telegramcidr.txt">https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/telegramcidr.txt</a><br>
+    path: ./ruleset/loyalsoldier/telegramcidr.yaml<br>
+  cncidr:<br>
+    type: http<br>
+    format: yaml<br>
+    interval: 86400<br>
+    behavior: ipcidr<br>
+    url: <a href="https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/cncidr.txt">https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/cncidr.txt</a><br>
+    path: ./ruleset/loyalsoldier/cncidr.yaml<br>
+  lancidr:<br>
+    type: http<br>
+    format: yaml<br>
+    interval: 86400<br>
+    behavior: ipcidr<br>
+    url: <a href="https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/lancidr.txt">https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/lancidr.txt</a><br>
+    path: ./ruleset/loyalsoldier/lancidr.yaml<br>
+  applications:<br>
+    type: http<br>
+    format: yaml<br>
+    interval: 86400<br>
+    behavior: classical<br>
+    url: <a href="https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/applications.txt">https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/applications.txt</a><br>
+    path: ./ruleset/loyalsoldier/applications.yaml<br>
+  openai:<br>
+    type: http<br>
+    format: yaml<br>
+    interval: 86400<br>
+    behavior: classical<br>
+    url: <a href="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/openai.yaml">https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/openai.yaml</a><br>
+    path: ./ruleset/MetaCubeX/openai.yaml<br>
+  bybit:<br>
+    type: http<br>
+    format: yaml<br>
+    interval: 86400<br>
+    behavior: classical<br>
+    url: <a href="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/bybit.yaml">https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/bybit.yaml</a><br>
+    path: ./ruleset/MetaCubeX/bybit.yaml<br>
+  pikpak:<br>
+    type: http<br>
+    format: yaml<br>
+    interval: 86400<br>
+    behavior: classical<br>
+    url: <a href="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/pikpak.yaml">https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/pikpak.yaml</a><br>
+    path: ./ruleset/MetaCubeX/pikpak.yaml<br>
+  anthropic:<br>
+    type: http<br>
+    format: yaml<br>
+    interval: 86400<br>
+    behavior: classical<br>
+    url: <a href="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/anthropic.yaml">https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/anthropic.yaml</a><br>
+    path: ./ruleset/MetaCubeX/anthropic.yaml<br>
+  &#39;google-gemini&#39;: # 引号用于确保 key 正确解析<br>
+    type: http<br>
+    format: yaml<br>
+    interval: 86400<br>
+    behavior: classical<br>
+    url: <a href="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/google-gemini.yaml">https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/google-gemini.yaml</a><br>
+    path: ./ruleset/MetaCubeX/google-gemini.yaml<br>
+  xai:<br>
+    type: http<br>
+    format: yaml<br>
+    interval: 86400<br>
+    behavior: classical<br>
+    url: <a href="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/xai.yaml">https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/xai.yaml</a><br>
+    path: ./ruleset/MetaCubeX/xai.yaml<br>
+  perplexity:<br>
+    type: http<br>
+    format: yaml<br>
+    interval: 86400<br>
+    behavior: classical<br>
+    url: <a href="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/perplexity.yaml">https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/perplexity.yaml</a><br>
+    path: ./ruleset/MetaCubeX/perplexity.yaml<br>
+  microsoft:<br>
+    type: http<br>
+    format: yaml<br>
+    interval: 86400<br>
+    behavior: classical<br>
+    url: <a href="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/microsoft.yaml">https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/microsoft.yaml</a><br>
+    path: ./ruleset/MetaCubeX/microsoft.yaml</p>
+
+<h1 id="toc_4">规则</h1>
+
+<p>rules:<br>
+  # 额外自定义规则<br>
+  - PROCESS-NAME,steam.exe,🐬 自定义直连<br>
+  - DOMAIN-SUFFIX,immersivetranslate.com,🐳 自定义代理<br>
+  # - DOMAIN-SUFFIX,bing.com,🐳 自定义代理<br>
+  # 自定义规则<br>
+  - DOMAIN-SUFFIX,googleapis.cn,🔰 模式选择<br>
+  - DOMAIN-SUFFIX,gstatic.com,🔰 模式选择<br>
+  - DOMAIN-SUFFIX,xn--ngstr-lra8j.com,🔰 模式选择<br>
+  - DOMAIN-SUFFIX,github.io,🔰 模式选择<br>
+  - DOMAIN,v2rayse.com,🔰 模式选择<br>
+  # blackmatrix7 规则集 (脚本中未启用, 这里保留注释)<br>
+  # MetaCubeX 规则集<br>
+  - RULE-SET,openai,💸 ChatGPT-Gemini-XAI-Perplexity<br>
+  - RULE-SET,pikpak,🅿️ PikPak<br>
+  - RULE-SET,bybit,🪙 Bybit<br>
+  - RULE-SET,anthropic,💵 Claude<br>
+  - RULE-SET,google-gemini,💸 ChatGPT-Gemini-XAI-Perplexity<br>
+  - RULE-SET,xai,💸 ChatGPT-Gemini-XAI-Perplexity<br>
+  - RULE-SET,perplexity,💸 ChatGPT-Gemini-XAI-Perplexity<br>
+  # Loyalsoldier 规则集<br>
+  - RULE-SET,applications,🔗 全局直连<br>
+  - RULE-SET,private,🔗 全局直连<br>
+  - RULE-SET,reject,🥰 广告过滤<br>
+  - RULE-SET,microsoft,Ⓜ️ 微软服务<br>
+  - RULE-SET,icloud,🍎 苹果服务<br>
+  - RULE-SET,apple,🍎 苹果服务<br>
+  - RULE-SET,google,📢 谷歌服务<br>
+  - RULE-SET,proxy,🔰 模式选择<br>
+  - RULE-SET,gfw,🔰 模式选择<br>
+  - RULE-SET,tld-not-cn,🔰 模式选择<br>
+  - RULE-SET,direct,🔗 全局直连<br>
+  - RULE-SET,lancidr,🔗 全局直连,no-resolve<br>
+  - RULE-SET,cncidr,🔗 全局直连,no-resolve<br>
+  - RULE-SET,telegramcidr,📲 电报消息,no-resolve<br>
+  # 其他规则<br>
+  - GEOIP,LAN,🔗 全局直连,no-resolve<br>
+  - GEOIP,CN,🔗 全局直连,no-resolve<br>
+  - MATCH,🐟 漏网之鱼</p>
+
+<h1 id="toc_5">代理组配置</h1>
+
+<h1 id="toc_6">注意: 脚本逻辑已为 <q>⚙️ 节点选择</q>, <q>♻️ 延迟选优</q>, <q>⚖️ 负载均衡(散列)</q>, <q>☁️ 负载均衡(轮询)</q> 组</h1>
+
+<h1 id="toc_7">自动添加了 exclude-filter 以排除名为 <q>webshare</q> 的落地节点。</h1>
+
+<h1 id="toc_8">如果你的落地节点名字不同或有更多，你需要手动更新下面的 exclude-filter 正则表达式。</h1>
+
+<p>proxy-groups:<br>
+  - name: 🔰 模式选择<br>
+    type: select<br>
+    proxies:<br>
+      - ⚙️ 节点选择<br>
+      - 🕊️ 落地节点<br>
+      - 🔗 全局直连<br>
+    # --- groupBaseOption 展开 ---<br>
+    interval: 0<br>
+    timeout: 3000<br>
+    url: <a href="https://www.google.com/generate_204">https://www.google.com/generate_204</a><br>
+    lazy: true<br>
+    max-failed-times: 3<br>
+    hidden: false</p>
+
+<ul>
+<li><p>name: ⚙️ 节点选择<br>
+type: select<br>
+proxies:</p>
+
+<ul>
+<li>♻️ 延迟选优</li>
+<li>🚑 故障转移</li>
+<li>⚖️ 负载均衡(散列)</li>
+<li>☁️ 负载均衡(轮询)
+# - DIRECT # 根据需要可以取消注释DIRECT
+use: # 引用所有 proxy-providers</li>
+<li>p1
+# - p2 # 如果有其他订阅，在这里添加
+# include-all: true # include-all 与 use 互斥，优先使用 use 指定 provider
+exclude-filter: &#39;<sup>?:webshare</sup>$&#39; # 排除落地节点 &#39;webshare&#39; (根据脚本逻辑添加)
+icon: <a href="https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/adjust.svg">https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/adjust.svg</a>
+# --- groupBaseOption 展开 ---
+interval: 0
+timeout: 3000
+url: <a href="https://www.google.com/generate_204">https://www.google.com/generate_204</a>
+lazy: true
+max-failed-times: 3
+hidden: false</li>
+</ul></li>
+<li><p>name: 🕊️ 落地节点<br>
+type: select<br>
+proxies:</p>
+
+<ul>
+<li>webshare # 手动列出落地节点名称
+# - landing-node-2 # 如果有更多，在此添加
+icon: <a href="https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/openwrt.svg">https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/openwrt.svg</a>
+# --- groupBaseOption 展开 ---
+interval: 0
+timeout: 3000
+url: <a href="https://www.google.com/generate_204">https://www.google.com/generate_204</a>
+lazy: true
+max-failed-times: 3
+hidden: false</li>
+</ul></li>
+<li><p>name: ♻️ 延迟选优<br>
+type: url-test<br>
+tolerance: 50<br>
+use:</p>
+
+<ul>
+<li>p1
+# - p2
+exclude-filter: &#39;<sup>?:webshare</sup>$&#39; # 排除落地节点 (根据脚本逻辑添加)
+icon: <a href="https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/speed.svg">https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/speed.svg</a>
+# --- groupBaseOption 展开 ---
+interval: 0 # url-test 通常有自己的测试间隔，这里 base 的 interval 设为 0
+timeout: 3000
+url: <a href="https://www.google.com/generate_204">https://www.google.com/generate_204</a> # url-test 的测试地址
+lazy: true
+max-failed-times: 3
+hidden: false</li>
+</ul></li>
+<li><p>name: 🚑 故障转移<br>
+type: fallback<br>
+use:</p>
+
+<ul>
+<li>p1
+# - p2
+# exclude-filter: &#39;<sup>?:webshare</sup>$&#39; # Fallback 通常不需要排除落地节点，除非你有特殊需求
+icon: <a href="https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/ambulance.svg">https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/ambulance.svg</a>
+# --- groupBaseOption 展开 ---
+interval: 0 # fallback 通常有自己的测试间隔，这里 base 的 interval 设为 0
+timeout: 3000
+url: <a href="https://www.google.com/generate_204">https://www.google.com/generate_204</a> # fallback 的测试地址
+lazy: true
+max-failed-times: 3
+hidden: false</li>
+</ul></li>
+<li><p>name: ⚖️ 负载均衡(散列)<br>
+type: load-balance<br>
+strategy: consistent-hashing<br>
+use:</p>
+
+<ul>
+<li>p1
+# - p2
+exclude-filter: &#39;<sup>?:webshare</sup>$&#39; # 排除落地节点 (根据脚本逻辑添加)
+icon: <a href="https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/merry_go.svg">https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/merry_go.svg</a>
+# --- groupBaseOption 展开 ---
+interval: 0 # load-balance 通常有自己的健康检查间隔
+timeout: 3000
+url: <a href="https://www.google.com/generate_204">https://www.google.com/generate_204</a> # load-balance 的健康检查地址
+lazy: true
+max-failed-times: 3
+hidden: false</li>
+</ul></li>
+<li><p>name: ☁️ 负载均衡(轮询)<br>
+type: load-balance<br>
+strategy: round-robin<br>
+use:</p>
+
+<ul>
+<li>p1
+# - p2
+exclude-filter: &#39;<sup>?:webshare</sup>$&#39; # 排除落地节点 (根据脚本逻辑添加)
+icon: <a href="https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/balance.svg">https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/balance.svg</a>
+# --- groupBaseOption 展开 ---
+interval: 0 # load-balance 通常有自己的健康检查间隔
+timeout: 3000
+url: <a href="https://www.google.com/generate_204">https://www.google.com/generate_204</a> # load-balance 的健康检查地址
+lazy: true
+max-failed-times: 3
+hidden: false</li>
+</ul></li>
+<li><p>name: 🌍 国外媒体<br>
+type: select<br>
+proxies:</p>
+
+<ul>
+<li>🔰 模式选择</li>
+<li>⚙️ 节点选择</li>
+<li>🕊️ 落地节点</li>
+<li>♻️ 延迟选优</li>
+<li>🚑 故障转移</li>
+<li>⚖️ 负载均衡(散列)</li>
+<li>☁️ 负载均衡(轮询)</li>
+<li>🔗 全局直连
+use:</li>
+<li>p1
+# - p2
+# exclude-filter: # 根据需要添加
+icon: <a href="https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/youtube.svg">https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/youtube.svg</a>
+# --- groupBaseOption 展开 ---
+interval: 0
+timeout: 3000
+url: <a href="https://www.google.com/generate_204">https://www.google.com/generate_204</a>
+lazy: true
+max-failed-times: 3
+hidden: false</li>
+</ul></li>
+<li><p>name: 💸 ChatGPT-Gemini-XAI-Perplexity<br>
+type: select<br>
+proxies:</p>
+
+<ul>
+<li>🔰 模式选择</li>
+<li>⚙️ 节点选择</li>
+<li>🕊️ 落地节点</li>
+<li>🔗 全局直连</li>
+<li>♻️ 延迟选优</li>
+<li>🚑 故障转移</li>
+<li>⚖️ 负载均衡(散列)</li>
+<li>☁️ 负载均衡(轮询)
+use:</li>
+<li>p1
+# - p2
+exclude-filter: <q>(?i)港|hk|hongkong|hong kong|俄|ru|russia|澳|macao</q> # 脚本自带的过滤器
+icon: <a href="https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/chatgpt.svg">https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/chatgpt.svg</a>
+# --- groupBaseOption 展开 ---
+interval: 0
+timeout: 3000
+url: <a href="https://www.google.com/generate_204">https://www.google.com/generate_204</a>
+lazy: true
+max-failed-times: 3
+hidden: false</li>
+</ul></li>
+<li><p>name: 💵 Claude<br>
+type: select<br>
+proxies:</p>
+
+<ul>
+<li>🔰 模式选择</li>
+<li>⚙️ 节点选择</li>
+<li>🕊️ 落地节点</li>
+<li>🔗 全局直连</li>
+<li>♻️ 延迟选优</li>
+<li>🚑 故障转移</li>
+<li>⚖️ 负载均衡(散列)</li>
+<li>☁️ 负载均衡(轮询)
+use:</li>
+<li>p1
+# - p2
+# exclude-filter: # 根据需要添加
+icon: <a href="https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/claude.svg">https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/claude.svg</a>
+# --- groupBaseOption 展开 ---
+interval: 0
+timeout: 3000
+url: <a href="https://www.google.com/generate_204">https://www.google.com/generate_204</a>
+lazy: true
+max-failed-times: 3
+hidden: false</li>
+</ul></li>
+<li><p>name: 🪙 Bybit<br>
+type: select<br>
+proxies:</p>
+
+<ul>
+<li>🔰 模式选择</li>
+<li>⚙️ 节点选择</li>
+<li>🕊️ 落地节点</li>
+<li>🔗 全局直连</li>
+<li>♻️ 延迟选优</li>
+<li>🚑 故障转移</li>
+<li>⚖️ 负载均衡(散列)</li>
+<li>☁️ 负载均衡(轮询)
+use:</li>
+<li>p1
+# - p2
+# exclude-filter: # 根据需要添加
+icon: <a href="https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/link.svg">https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/link.svg</a> # 图标可能需要调整
+# --- groupBaseOption 展开 ---
+interval: 0
+timeout: 3000
+url: <a href="https://www.google.com/generate_204">https://www.google.com/generate_204</a>
+lazy: true
+max-failed-times: 3
+hidden: false</li>
+</ul></li>
+<li><p>name: 🅿️ PikPak<br>
+type: select<br>
+proxies:</p>
+
+<ul>
+<li>🔰 模式选择</li>
+<li>⚙️ 节点选择</li>
+<li>🕊️ 落地节点</li>
+<li>🔗 全局直连</li>
+<li>♻️ 延迟选优</li>
+<li>🚑 故障转移</li>
+<li>⚖️ 负载均衡(散列)</li>
+<li>☁️ 负载均衡(轮询)
+use:</li>
+<li>p1
+# - p2
+# exclude-filter: # 根据需要添加
+icon: <a href="https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/link.svg">https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/link.svg</a> # 图标可能需要调整
+# --- groupBaseOption 展开 ---
+interval: 0
+timeout: 3000
+url: <a href="https://www.google.com/generate_204">https://www.google.com/generate_204</a>
+lazy: true
+max-failed-times: 3
+hidden: false</li>
+</ul></li>
+<li><p>name: 📲 电报消息<br>
+type: select<br>
+proxies:</p>
+
+<ul>
+<li>🔰 模式选择</li>
+<li>⚙️ 节点选择</li>
+<li>🕊️ 落地节点</li>
+<li>♻️ 延迟选优</li>
+<li>🚑 故障转移</li>
+<li>⚖️ 负载均衡(散列)</li>
+<li>☁️ 负载均衡(轮询)</li>
+<li>🔗 全局直连
+use:</li>
+<li>p1
+# - p2
+# exclude-filter: # 根据需要添加
+icon: <a href="https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/telegram.svg">https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/telegram.svg</a>
+# --- groupBaseOption 展开 ---
+interval: 0
+timeout: 3000
+url: <a href="https://www.google.com/generate_204">https://www.google.com/generate_204</a>
+lazy: true
+max-failed-times: 3
+hidden: false</li>
+</ul></li>
+<li><p>name: 📢 谷歌服务<br>
+type: select<br>
+proxies:</p>
+
+<ul>
+<li>🔰 模式选择</li>
+<li>⚙️ 节点选择</li>
+<li>🕊️ 落地节点</li>
+<li>♻️ 延迟选优</li>
+<li>🚑 故障转移</li>
+<li>⚖️ 负载均衡(散列)</li>
+<li>☁️ 负载均衡(轮询)</li>
+<li>🔗 全局直连
+use:</li>
+<li>p1
+# - p2
+# exclude-filter: # 根据需要添加
+icon: <a href="https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/google.svg">https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/google.svg</a>
+# --- groupBaseOption 展开 ---
+interval: 0
+timeout: 3000
+url: <a href="https://www.google.com/generate_204">https://www.google.com/generate_204</a>
+lazy: true
+max-failed-times: 3
+hidden: false</li>
+</ul></li>
+<li><p>name: 🍎 苹果服务<br>
+type: select<br>
+proxies:</p>
+
+<ul>
+<li>🔰 模式选择</li>
+<li>⚙️ 节点选择</li>
+<li>🕊️ 落地节点</li>
+<li>♻️ 延迟选优</li>
+<li>🚑 故障转移</li>
+<li>⚖️ 负载均衡(散列)</li>
+<li>☁️ 负载均衡(轮询)</li>
+<li>🔗 全局直连
+use:</li>
+<li>p1
+# - p2
+# exclude-filter: # 根据需要添加
+icon: <a href="https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/apple.svg">https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/apple.svg</a>
+# --- groupBaseOption 展开 ---
+interval: 0
+timeout: 3000
+url: <a href="https://www.google.com/generate_204">https://www.google.com/generate_204</a>
+lazy: true
+max-failed-times: 3
+hidden: false</li>
+</ul></li>
+<li><p>name: Ⓜ️ 微软服务<br>
+type: select<br>
+proxies:</p>
+
+<ul>
+<li>🔰 模式选择</li>
+<li>⚙️ 节点选择</li>
+<li>🕊️ 落地节点</li>
+<li>🔗 全局直连</li>
+<li>♻️ 延迟选优</li>
+<li>🚑 故障转移</li>
+<li>⚖️ 负载均衡(散列)</li>
+<li>☁️ 负载均衡(轮询)
+use:</li>
+<li>p1
+# - p2
+# exclude-filter: # 根据需要添加
+icon: <a href="https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/microsoft.svg">https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/microsoft.svg</a>
+# --- groupBaseOption 展开 ---
+interval: 0
+timeout: 3000
+url: <a href="https://www.google.com/generate_204">https://www.google.com/generate_204</a>
+lazy: true
+max-failed-times: 3
+hidden: false</li>
+</ul></li>
+<li><p>name: 🥰 广告过滤<br>
+type: select<br>
+proxies:</p>
+
+<ul>
+<li>REJECT</li>
+<li>DIRECT
+icon: <a href="https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/bug.svg">https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/bug.svg</a>
+# --- groupBaseOption 展开 ---
+interval: 0
+timeout: 3000
+url: <a href="https://www.google.com/generate_204">https://www.google.com/generate_204</a>
+lazy: true
+max-failed-times: 3
+hidden: false</li>
+</ul></li>
+<li><p>name: 🔗 全局直连<br>
+type: select<br>
+proxies:</p>
+
+<ul>
+<li>DIRECT</li>
+<li>⚙️ 节点选择</li>
+<li>♻️ 延迟选优</li>
+<li>🚑 故障转移</li>
+<li>⚖️ 负载均衡(散列)</li>
+<li>☁️ 负载均衡(轮询)
+# use: # 通常直连组不需要 use provider
+# include-all: true # 如果你想包含所有独立定义的代理节点，可以取消注释
+icon: <a href="https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/link.svg">https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/link.svg</a>
+# --- groupBaseOption 展开 ---
+interval: 0
+timeout: 3000
+url: <a href="https://www.google.com/generate_204">https://www.google.com/generate_204</a>
+lazy: true
+max-failed-times: 3
+hidden: false</li>
+</ul></li>
+<li><p>name: ❌ 全局拦截<br>
+type: select<br>
+proxies:</p>
+
+<ul>
+<li>REJECT</li>
+<li>DIRECT
+icon: <a href="https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/block.svg">https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/block.svg</a>
+# --- groupBaseOption 展开 ---
+interval: 0
+timeout: 3000
+url: <a href="https://www.google.com/generate_204">https://www.google.com/generate_204</a>
+lazy: true
+max-failed-times: 3
+hidden: false</li>
+</ul></li>
+<li><p>name: 🐬 自定义直连<br>
+type: select<br>
+proxies:</p>
+
+<ul>
+<li>🔗 全局直连</li>
+<li>🔰 模式选择</li>
+<li>⚙️ 节点选择</li>
+<li>♻️ 延迟选优</li>
+<li>🚑 故障转移</li>
+<li>⚖️ 负载均衡(散列)</li>
+<li>☁️ 负载均衡(轮询)
+# use: # 根据需要添加
+# include-all: true # 根据需要添加
+icon: <a href="https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/unknown.svg">https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/unknown.svg</a> # 图标可能需要调整
+# --- groupBaseOption 展开 ---
+interval: 0
+timeout: 3000
+url: <a href="https://www.google.com/generate_204">https://www.google.com/generate_204</a>
+lazy: true
+max-failed-times: 3
+hidden: false</li>
+</ul></li>
+<li><p>name: 🐳 自定义代理<br>
+type: select<br>
+proxies:</p>
+
+<ul>
+<li>🔰 模式选择</li>
+<li>⚙️ 节点选择</li>
+<li>🕊️ 落地节点</li>
+<li>♻️ 延迟选优</li>
+<li>🚑 故障转移</li>
+<li>⚖️ 负载均衡(散列)</li>
+<li>☁️ 负载均衡(轮询)</li>
+<li>🔗 全局直连
+use:</li>
+<li>p1
+# - p2
+# exclude-filter: # 根据需要添加
+icon: <a href="https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/openwrt.svg">https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/openwrt.svg</a> # 图标可能需要调整
+# --- groupBaseOption 展开 ---
+interval: 0
+timeout: 3000
+url: <a href="https://www.google.com/generate_204">https://www.google.com/generate_204</a>
+lazy: true
+max-failed-times: 3
+hidden: false</li>
+</ul></li>
+<li><p>name: 🐟 漏网之鱼<br>
+type: select<br>
+proxies:</p>
+
+<ul>
+<li>🔰 模式选择</li>
+<li>⚙️ 节点选择</li>
+<li>🕊️ 落地节点</li>
+<li>♻️ 延迟选优</li>
+<li>🚑 故障转移</li>
+<li>⚖️ 负载均衡(散列)</li>
+<li>☁️ 负载均衡(轮询)</li>
+<li>🔗 全局直连
+use:</li>
+<li>p1
+# - p2
+# exclude-filter: # 根据需要添加
+icon: <a href="https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/fish.svg">https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/fish.svg</a>
+# --- groupBaseOption 展开 ---
+interval: 0
+timeout: 3000
+url: <a href="https://www.google.com/generate_204">https://www.google.com/generate_204</a>
+lazy: true
+max-failed-times: 3
+hidden: false
+</div>
+</body>
+</html></li>
+</ul></li>
+</ul>
+<script>window.webkit.messageHandlers.TextLoaded.postMessage('TextLoaded')</script></body></html>
